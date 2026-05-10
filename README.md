@@ -11,7 +11,7 @@ The pipeline automatically runs once a day to make sure we are in sync, but the 
 | column | example | description |
 | :--- | :--- | :--- |
 | **route_id** | `"33"` | The name of the route. |
-| **trip_id** | `1010` | The unique identifier of the trip in our static GTFS data. |
+| **trip_id** | `"1010"` | The unique identifier of the trip in our static GTFS data. |
 | **service_id** | `2` | Which type of service (e.g., weekday, Saturday, or Sunday) |
 | **direction_id** | `1` | numerical identifier for the direction |
 | **block_id** | `"3304DTS"` | GTFS Block ID |

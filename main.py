@@ -65,12 +65,12 @@ with zipfile.ZipFile(zip_data) as z:
     with z.open("stop_times.txt") as f:
         for row in csv.DictReader(f.read().decode("utf-8-sig").splitlines()):
             stop_times_count += 1
-            trip_id = int(row["trip_id"])
+            trip_id = row["trip_id"]
             trip_stop_times[trip_id].append(row)
 
     with z.open("trips.txt") as f:
         for row in csv.DictReader(f.read().decode("utf-8-sig").splitlines()):
-            trip_id = int(row["trip_id"])
+            trip_id = row["trip_id"]
 
             trip = {
                 "trip_id": trip_id,
