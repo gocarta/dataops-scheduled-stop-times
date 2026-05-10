@@ -51,10 +51,16 @@ trip_stop_times = defaultdict(list)
 direction_ids = {"0": "Outbound", "1": "Inbound"}
 
 stop_times_count = 0
+stops = {}
 trips = {}
 results = []
 
 with zipfile.ZipFile(zip_data) as z:
+    with z.open("stops.txt") as f:
+        for row in csv.DictReader(f.read().decode("utf-8-sig").splitlines()):
+            stop_id = int(row["stop_id"])
+            stops[stop_id] = row
+
     # group stop_times by trip
     with z.open("stop_times.txt") as f:
         for row in csv.DictReader(f.read().decode("utf-8-sig").splitlines()):
@@ -95,7 +101,14 @@ for trip_id, stop_times in trip_stop_times.items():
         arrival_time = stop_time["arrival_time"]
         departure_time = stop_time["departure_time"]
         stop_duration = calc_duration(arrival_time, departure_time)
-        stop_id = stop_time["stop_id"]
+        stop_id = int(stop_time["stop_id"])
+        stop = stops[stop_id]
+
+        stop_code = int(stop["stop_code"])
+        stop_name = stop["stop_name"]
+        stop_latitude = float(stop["stop_lat"])
+        stop_longitude = float(stop["stop_lon"])
+
         trip = trips[trip_id]
 
         trip_progress = calc_duration(trip_start_time, arrival_time)
@@ -111,10 +124,14 @@ for trip_id, stop_times in trip_stop_times.items():
             "stop_departure_time": departure_time,
             "stop_duration": stop_duration,
             "stop_id": stop_id,
+            "stop_code": stop_code,
+            "stop_name": stop_name,
+            "longitude": stop_longitude,
+            "latitude": stop_latitude,
             "stop_sequence": int(stop_time["stop_sequence"]),
             "stop_headsign": stop_time["stop_headsign"],
-            "stop_pickup_type": stop_time["pickup_type"],
-            "stop_drop_off_type": stop_time["drop_off_type"],
+            "stop_pickup_type": int(stop_time["pickup_type"]),
+            "stop_drop_off_type": int(stop_time["drop_off_type"]),
             "shape_dist_traveled": float(stop_time["shape_dist_traveled"]),
             "stop_timepoint": stop_time["timepoint"] == "1",
             "trip_start_time": trip_start_time,
@@ -145,6 +162,10 @@ client.update_dataset(
         "stop_departure_time",
         "stop_duration",
         "stop_id",
+        "stop_code",
+        "stop_name",
+        "longitude",
+        "latitude",
         "stop_sequence",
         "stop_headsign",
         "stop_pickup_type",
@@ -156,6 +177,8 @@ client.update_dataset(
         "trip_duration",
         "trip_progress",
     ],
+    latitude_key="latitude",
+    longitude_key="longitude",
 )
 
 print(f"[dataops-scheduled-stop-times] updated {len(results)} rows")

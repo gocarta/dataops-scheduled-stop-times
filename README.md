@@ -19,11 +19,15 @@ The pipeline automatically runs once a day to make sure we are in sync, but the 
 | **stop_arrival_time** | `"14:26:56"` | Time the bus is scheduled to arrive at the stop |
 | **stop_departure_time** | `"14:26:56"` | Time the bus is scheduled to leave from the stop |
 | **stop_duration** | `0` | Time (in seconds) that the bus is supposed to dwell at the stop |
-| **stop_id** | `"794"` | Identifier of the stop |
+| **stop_id** | `794` | Identifier of the stop |
+| **stop_code** | `1379` | Stop code |
+| **stop_name** | `"Broad & 5th1"` | Human-friendly name of the stop |
+| **longitude** | `-85.310790` | longitude location of the stop |
+| **latitude** | `35.050629` | latitude location of the stop |
 | **stop_sequence** | `4` | The stop number within the trip (e.g. 4th stop in the trip) |
 | **stop_headsign** | `"CHOO CHOO"` | the headsign (what displays on the outward-facing bus sign) |
-| **stop_pickup_type** | `"0"` | identifier of stop pick up type |
-| **stop_drop_off_type** | `"0"` | identifier of stop drop off type |
+| **stop_pickup_type** | `0` | not sure what this means |
+| **stop_drop_off_type** | `0` | not sure what this means |
 | **shape_dist_traveled** | `418.71` | how far along the trip we've gone |
 | **stop_timepoint** | `false` | whether the stop is a timepoint |
 | **trip_start_time** | `"14:25:00"` | when the whole trip started |
