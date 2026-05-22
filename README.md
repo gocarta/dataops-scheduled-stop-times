@@ -25,6 +25,7 @@ The pipeline automatically runs once a day to make sure we are in sync, but the 
 | **longitude** | `-85.310790` | longitude location of the stop |
 | **latitude** | `35.050629` | latitude location of the stop |
 | **stop_sequence** | `4` | The stop number within the trip (e.g. 4th stop in the trip) |
+| **stop_sequence_actual** | `3` | Sometimes stop_sequence will skip a stop. This fixes that. |
 | **stop_headsign** | `"CHOO CHOO"` | the headsign (what displays on the outward-facing bus sign) |
 | **stop_pickup_type** | `0` | not sure what this means |
 | **stop_drop_off_type** | `0` | not sure what this means |
